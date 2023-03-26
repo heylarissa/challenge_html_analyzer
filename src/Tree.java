@@ -8,7 +8,19 @@ public class Tree {
         this.root = this.createNewNode(key);
     }
 
-    public Node createNewNode (String key){
+    public void populateTree (String content, Node parent) {
+        if (content.contains("</")) {
+            
+            parent = parent.nextSibling;
+            return;
+        };
+        
+
+        this.insertNode(content, parent.key, parent);
+        parent = parent.firstSon;
+    }
+
+    public Node createNewNode(String key) {
         Node newNode = new Node();
 
         newNode.key = key;
@@ -18,11 +30,12 @@ public class Tree {
         return newNode;
     }
 
-    public void showTree(Node root){
-        if (root == null) return;
-        System.out.print("("+root.key);
+    public void showTree(Node root) {
+        if (root == null)
+            return;
+        System.out.print("(" + root.key);
         Node p = root.firstSon;
-        while (p!=null){
+        while (p != null) {
             showTree(p);
             p = p.nextSibling;
         }
@@ -31,8 +44,8 @@ public class Tree {
 
     public boolean insertNode(String newKey, String keyParent, Node root) {
         Node parent = this.searchNode(keyParent, root);
-
-        if (parent == null){
+        
+        if (parent == null) {
             return (false);
         }
 
@@ -41,9 +54,8 @@ public class Tree {
         Node p = parent.firstSon;
         if (p == null) {
             parent.firstSon = child;
-        }
-        else {
-            while (p.nextSibling != null){
+        } else {
+            while (p.nextSibling != null) {
                 p = p.nextSibling;
 
             }
@@ -54,23 +66,25 @@ public class Tree {
 
     }
 
-    public Node getRoot(){
-        return this.root;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+    public Node getRoot() {
+        return this.root;
     }
 
-
     public Node searchNode(String key, Node root) {
-        if (root == null) return null;
-        if (root.key == key) return root;
+        if (root == null)
+            return null;
+        if (root.key == key)
+            return root;
 
         Node p = root.firstSon;
 
-        while (p!= null){
+        while (p != null) {
             Node resp = searchNode(key, p);
-            if (resp != null) return(resp);
+            if (resp != null)
+                return (resp);
             p = p.nextSibling;
         }
         return null;
-        
+
     }
 }

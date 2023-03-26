@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Content {
     public String webpage;
@@ -15,30 +13,42 @@ public class Content {
         this.webpage = webpage;
     }
 
-    public List<String> getContentPage() throws IOException {
-        List<String> content = new ArrayList<>();
-          
-        Tree genericTree = new Tree("treeroot");
+    public String getContentPage() throws IOException {
+        String content = new String();
 
-        genericTree.insertNode("teste", genericTree.getRoot().key,  genericTree.getRoot());
-        genericTree.insertNode("webpage", genericTree.getRoot().key, genericTree.getRoot());
-        genericTree.insertNode("tree", genericTree.getRoot().firstSon.key, genericTree.getRoot().firstSon);
-        genericTree.insertNode("tree", genericTree.getRoot().firstSon.key, genericTree.getRoot().firstSon);
-        genericTree.insertNode("tree", genericTree.getRoot().firstSon.key, genericTree.getRoot().firstSon);
-        genericTree.showTree(genericTree.getRoot());
+        Tree genericTree = new Tree("");
+
         try {
             URL url = new URL(this.webpage);
             BufferedReader readr = new BufferedReader(new InputStreamReader(url.openStream()));
 
             String line;
+            Integer i = 0;
+            Node parent = genericTree.getRoot();
             while ((line = readr.readLine()) != null) {
                 if (line != "" ) {
-                    content.add(line.trim().replaceAll("\\s+", " ")); // remove espaços em branco
-                    System.out.println(content);
+                    content = line.trim().replaceAll("\\s+", " "); // remove espaços em branco
+                    
+                    if (i == 0) {
+                        parent.key = content;
+                    } else {
+                        genericTree.populateTree(content, parent);
+                    }
+                    
+                    /*if (!content.contains("</")){
+                        genericTree.insertNode(content, parent.key, parent);
+                        if (line.contains("<")) oldParent = parent;
+                        parent = parent.firstSon;
+                    } else if (content.contains("</")){
+                        parent = oldParent;
+                    }*/
                 }
+                i++;
             }
+            genericTree.showTree(genericTree.getRoot());
 
             readr.close();
+
         } catch (MalformedURLException e) {
             System.out.println("Malformed URL Exception raised");
         }
