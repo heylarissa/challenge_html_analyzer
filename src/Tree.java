@@ -3,9 +3,12 @@ package src;
 public class Tree {
     /* Árvore N-Ária */
     private Node root;
+    public Pile parents;
+
 
     public Tree(String key) {
         this.root = this.createNewNode(key);
+        this.parents = new Pile();
     }
 
     public void populateTree (String content, Node parent) {
@@ -68,6 +71,14 @@ public class Tree {
 
     public Node getRoot() {
         return this.root;
+    }
+
+    public void setRoot(Node value){
+        this.root = value;
+    }
+
+    public Pile getPile(){
+        return this.parents;
     }
 
     public Node searchNode(String key, Node root) {

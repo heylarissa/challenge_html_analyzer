@@ -25,22 +25,21 @@ public class Content {
             String line;
             Integer i = 0;
             Node parent = genericTree.getRoot();
+            
             while ((line = readr.readLine()) != null) {
                 if (line != "" ) {
                     content = line.trim().replaceAll("\\s+", " "); // remove espaços em branco
-                    
-                    if (i == 0) {
+                    if (content.contains("</")){
+                        genericTree.getPile().popLastTagNode(); // desempilha
+                    }
+                    else if (!content.contains("/")){
+                        
+                        genericTree.parents.pushNode(genericTree.createNewNode(content)); // empilha
+                    }
+                    /*if (i == 0) {
                         parent.key = content;
                     } else {
                         genericTree.populateTree(content, parent);
-                    }
-                    
-                    /*if (!content.contains("</")){
-                        genericTree.insertNode(content, parent.key, parent);
-                        if (line.contains("<")) oldParent = parent;
-                        parent = parent.firstSon;
-                    } else if (content.contains("</")){
-                        parent = oldParent;
                     }*/
                 }
                 i++;
