@@ -23,7 +23,7 @@ public class Tree {
             String subContent = content.substring(2);
             String subParent = parent.key.substring(1);
             if (!subContent.equals(subParent)) {
-                throw new Exception("malformed HTML");
+                throw new MalformedHTML();
             }
 
             this.getPile().popLastTagNode(); // desempilha
