@@ -39,7 +39,6 @@ public class Content {
                 }
                 i++;
             }
-            this.genericTree.showTree( this.genericTree.getRoot() );
 
             readr.close();
 

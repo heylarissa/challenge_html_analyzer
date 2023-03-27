@@ -8,7 +8,7 @@ public class HtmlAnalyzer {
             contentPage.getContentPage();
 
             if ( contentPage.genericTree.getLevel() != 0 ) {
-                System.out.println("Nivel mais profundo: " + contentPage.genericTree.getLevel() + ": " + contentPage.genericTree.getValue() );
+                System.out.println(contentPage.genericTree.getValue());
             }
         
     }
