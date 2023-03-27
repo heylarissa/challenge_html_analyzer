@@ -11,6 +11,8 @@ public class Tree {
     }
 
     public void populateTree (String content, Node parent) throws Exception {
+        parent = this.parents.getLastElement();
+
         if (content.contains("</")) {
  /*           String subContent = content.substring(2);
             String subParent = parent.key.substring(1);
@@ -19,7 +21,6 @@ public class Tree {
             }
 */
             this.getPile().popLastTagNode(); // desempilha
-            parent = this.parents.getLastElement();
 
             return;
         }
@@ -28,7 +29,6 @@ public class Tree {
         }
 
         this.insertNode(content, parent.key, parent);
-        parent = this.parents.getLastElement().firstSon;
     }
 
     public Node createNewNode(String key) {
