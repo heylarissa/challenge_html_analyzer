@@ -33,7 +33,7 @@ public class Content {
                         parent.key = content;
                         genericTree.getPile().pushNode(parent);
                     } else {
-                        genericTree.populateTree(content, parent);
+                        genericTree.populateTree(content);
                     }
                 }
                 i++;

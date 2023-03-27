@@ -10,10 +10,11 @@ public class Tree {
         this.parents = new Pile();
     }
 
-    public void populateTree (String content, Node parent) throws Exception {
-        parent = this.parents.getLastElement();
+    public void populateTree (String content) throws Exception {
+
 
         if (content.contains("</")) {
+        //Node parent = this.parents.getLastElement();
  /*           String subContent = content.substring(2);
             String subParent = parent.key.substring(1);
             if (!subContent.equals(subParent)){
@@ -28,7 +29,7 @@ public class Tree {
             this.parents.pushNode(this.createNewNode(content)); // empilha
         }
 
-        this.insertNode(content, parent);
+        this.insertNode(content);
     }
 
     public Node createNewNode(String key) {
@@ -53,9 +54,8 @@ public class Tree {
         System.out.print(")");
     }
 
-    public boolean insertNode(String newKey, Node ParentR) {
-        Node parent = ParentR;
-        
+    public boolean insertNode(String newKey) {
+        Node parent = this.parents.getLastElement();
         if (parent == null) {
             return (false);
         }
