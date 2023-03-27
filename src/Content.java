@@ -45,9 +45,11 @@ public class Content {
 
         } catch (MalformedHTML e) {
             System.out.println( e.getMessage() );
+            System.exit(1);
  
         } catch (Exception e) {
             System.out.println("URL connection error");
+            System.exit(1);
         }
     }
 
