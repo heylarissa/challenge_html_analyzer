@@ -13,15 +13,15 @@ public class Tree {
 
     public void populateTree (String content, Node parent) throws Exception {
         if (content.contains("</")) {
-            //
-            parent = this.parents.getLastElement();
+            
+            parent = this.parents.getLastElement().nextSibling;
 
-            String subContent = content.substring(2);
+ /*           String subContent = content.substring(2);
             String subParent = parent.key.substring(1);
             if (!subContent.equals(subParent)){
                 throw new Exception("HTML inválido");
             }
-
+*/
             this.getPile().popLastTagNode(); // desempilha
 
             return;
@@ -31,7 +31,7 @@ public class Tree {
         }
 
         this.insertNode(content, parent.key, parent);
-        parent = parent.firstSon;
+        parent = this.parents.getLastElement().firstSon;
     }
 
     public Node createNewNode(String key) {

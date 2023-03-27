@@ -29,7 +29,6 @@ public class Content {
             while ((line = readr.readLine()) != null) {
                 if (line != "" ) {
                     content = line.trim().replaceAll("\\s+", " "); // remove espaços em branco
-
                     
                     if (i == 0) {
                         parent.key = content;
