@@ -4,10 +4,14 @@ public class Tree {
     /* Árvore N-Ária */
     private Node root;
     public Pile parents;
+	private Integer level;
+    private String value;
 
     public Tree(String key) {
         this.root = this.createNewNode(key);
         this.parents = new Pile();
+        this.level = 0;
+        this.value = null;
     }
 
     public void populateTree(String content) throws Exception {
@@ -29,6 +33,13 @@ public class Tree {
         this.insertNode(child);
         if (content.contains("<")) {
             this.parents.pushNode(child); // empilha
+        } else {
+            // Salva o primeiro caso do maior nivel
+            if ( this.level < this.parents.pileSize() ) {
+                this.level = this.parents.pileSize();
+                this.value = content;
+            }
+
         }
 
     }
@@ -86,6 +97,14 @@ public class Tree {
 
     public Pile getPile() {
         return this.parents;
+    }
+
+    public Integer getLevel() {
+        return this.level;
+    }
+
+    public String getValue() {
+        return this.value;
     }
 
 }

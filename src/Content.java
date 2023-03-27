@@ -6,15 +6,17 @@ import java.net.URL;
 
 public class Content {
     public String webpage;
+    public Tree genericTree;
 
     public Content(String webpage) {
         this.webpage = webpage;
+        this.genericTree = new Tree("");
+
     }
 
     public void getContentPage() throws Exception {
         String content = new String();
 
-        Tree genericTree = new Tree("");
 
         try {
             URL url = new URL(this.webpage);
@@ -22,7 +24,7 @@ public class Content {
 
             String line;
             Integer i = 0;
-            Node parent = genericTree.getRoot();
+            Node parent = this.genericTree.getRoot();
             
             while ((line = readr.readLine()) != null) {
                 if (line != "" ) {
@@ -30,14 +32,14 @@ public class Content {
                     
                     if (i == 0) {
                         parent.key = content;
-                        genericTree.getPile().pushNode(parent);
+                        this.genericTree.getPile().pushNode(parent);
                     } else {
-                        genericTree.populateTree(content);
+                        this.genericTree.populateTree(content);
                     }
                 }
                 i++;
             }
-            genericTree.showTree(genericTree.getRoot());
+            this.genericTree.showTree( this.genericTree.getRoot() );
 
             readr.close();
 
