@@ -28,7 +28,7 @@ public class Tree {
             this.parents.pushNode(this.createNewNode(content)); // empilha
         }
 
-        this.insertNode(content, parent.key, parent);
+        this.insertNode(content, parent);
     }
 
     public Node createNewNode(String key) {
@@ -53,8 +53,8 @@ public class Tree {
         System.out.print(")");
     }
 
-    public boolean insertNode(String newKey, String keyParent, Node root) {
-        Node parent = this.searchNode(keyParent, root);
+    public boolean insertNode(String newKey, Node ParentR) {
+        Node parent = ParentR;
         
         if (parent == null) {
             return (false);
@@ -89,21 +89,4 @@ public class Tree {
         return this.parents;
     }
 
-    public Node searchNode(String key, Node root) {
-        if (root == null)
-            return null;
-        if (root.key == key)
-            return root;
-
-        Node p = root.firstSon;
-
-        while (p != null) {
-            Node resp = searchNode(key, p);
-            if (resp != null)
-                return (resp);
-            p = p.nextSibling;
-        }
-        return null;
-
-    }
 }
