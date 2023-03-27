@@ -13,7 +13,7 @@ public class Content {
         this.webpage = webpage;
     }
 
-    public String getContentPage() throws IOException {
+    public String getContentPage() throws Exception {
         String content = new String();
 
         Tree genericTree = new Tree("");
@@ -29,18 +29,13 @@ public class Content {
             while ((line = readr.readLine()) != null) {
                 if (line != "" ) {
                     content = line.trim().replaceAll("\\s+", " "); // remove espaços em branco
-                    if (content.contains("</")){
-                        genericTree.getPile().popLastTagNode(); // desempilha
-                    }
-                    else if (!content.contains("/")){
-                        
-                        genericTree.parents.pushNode(genericTree.createNewNode(content)); // empilha
-                    }
-                    /*if (i == 0) {
+
+                    
+                    if (i == 0) {
                         parent.key = content;
                     } else {
                         genericTree.populateTree(content, parent);
-                    }*/
+                    }
                 }
                 i++;
             }

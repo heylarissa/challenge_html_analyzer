@@ -11,13 +11,24 @@ public class Tree {
         this.parents = new Pile();
     }
 
-    public void populateTree (String content, Node parent) {
+    public void populateTree (String content, Node parent) throws Exception {
         if (content.contains("</")) {
-            
-            parent = parent.nextSibling;
+            //
+            parent = this.parents.getLastElement();
+
+            String subContent = content.substring(2);
+            String subParent = parent.key.substring(1);
+            if (!subContent.equals(subParent)){
+                throw new Exception("HTML inválido");
+            }
+
+            this.getPile().popLastTagNode(); // desempilha
+
             return;
-        };
-        
+        }
+        else if (content.contains("<")){
+            this.parents.pushNode(this.createNewNode(content)); // empilha
+        }
 
         this.insertNode(content, parent.key, parent);
         parent = parent.firstSon;
