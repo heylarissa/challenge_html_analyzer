@@ -10,26 +10,27 @@ public class Tree {
         this.parents = new Pile();
     }
 
-    public void populateTree (String content) throws Exception {
+    public void populateTree(String content) throws Exception {
 
-
+        Node child = this.createNewNode(content);
         if (content.contains("</")) {
-        //Node parent = this.parents.getLastElement();
- /*           String subContent = content.substring(2);
-            String subParent = parent.key.substring(1);
-            if (!subContent.equals(subParent)){
-                throw new Exception("HTML inválido");
-            }
-*/
+            // Node parent = this.parents.getLastElement();
+            /*
+             * String subContent = content.substring(2);
+             * String subParent = parent.key.substring(1);
+             * if (!subContent.equals(subParent)){
+             * throw new Exception("HTML inválido");
+             * }
+             */
             this.getPile().popLastTagNode(); // desempilha
 
             return;
         }
-        else if (content.contains("<")){
-            this.parents.pushNode(this.createNewNode(content)); // empilha
+        this.insertNode(child);
+        if (content.contains("<")) {
+            this.parents.pushNode(child); // empilha
         }
 
-        this.insertNode(content);
     }
 
     public Node createNewNode(String key) {
@@ -54,17 +55,15 @@ public class Tree {
         System.out.print(")");
     }
 
-    public boolean insertNode(String newKey) {
-        Node parent = this.parents.getLastElement();
-        if (parent == null) {
+    public boolean insertNode(Node child) {
+        // Node parent = this.parents.getLastElement();
+        if (this.parents.getLastElement() == null) {
             return (false);
         }
 
-        Node child = this.createNewNode(newKey);
-
-        Node p = parent.firstSon;
+        Node p = this.parents.getLastElement().firstSon;
         if (p == null) {
-            parent.firstSon = child;
+            this.parents.getLastElement().firstSon = child;
         } else {
             while (p.nextSibling != null) {
                 p = p.nextSibling;
@@ -81,11 +80,11 @@ public class Tree {
         return this.root;
     }
 
-    public void setRoot(Node value){
+    public void setRoot(Node value) {
         this.root = value;
     }
 
-    public Pile getPile(){
+    public Pile getPile() {
         return this.parents;
     }
 
