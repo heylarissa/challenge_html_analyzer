@@ -1,7 +1,6 @@
 package src;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -32,6 +31,7 @@ public class Content {
                     
                     if (i == 0) {
                         parent.key = content;
+                        genericTree.getPile().pushNode(parent);
                     } else {
                         genericTree.populateTree(content, parent);
                     }

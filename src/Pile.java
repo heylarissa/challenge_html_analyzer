@@ -36,7 +36,6 @@ public class Pile {
         // empilha
         this.pile.add(value);
         this.positionPile++;
-
     }
 
     public ArrayList<Node> popLastTagNode() {
@@ -48,15 +47,9 @@ public class Pile {
         Integer position = this.positionPile;
 
         Node s = this.pile.get(position);
-        this.pile.remove(s); // remove objeto anterior
-        while (!s.key.contains("<")){
-            position--;
-            s = this.pile.get(position);
-        }
-
-        this.pile.remove(s);
+        this.pile.remove(s); 
         
-        this.positionPile= this.positionPile -2;
+        this.positionPile--;
         return this.pile;
     }
 

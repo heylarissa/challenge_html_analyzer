@@ -5,7 +5,6 @@ public class Tree {
     private Node root;
     public Pile parents;
 
-
     public Tree(String key) {
         this.root = this.createNewNode(key);
         this.parents = new Pile();
@@ -13,9 +12,6 @@ public class Tree {
 
     public void populateTree (String content, Node parent) throws Exception {
         if (content.contains("</")) {
-            
-            parent = this.parents.getLastElement().nextSibling;
-
  /*           String subContent = content.substring(2);
             String subParent = parent.key.substring(1);
             if (!subContent.equals(subParent)){
@@ -23,6 +19,7 @@ public class Tree {
             }
 */
             this.getPile().popLastTagNode(); // desempilha
+            parent = this.parents.getLastElement();
 
             return;
         }
