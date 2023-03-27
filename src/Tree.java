@@ -14,14 +14,14 @@ public class Tree {
 
         Node child = this.createNewNode(content);
         if (content.contains("</")) {
-            // Node parent = this.parents.getLastElement();
-            /*
-             * String subContent = content.substring(2);
-             * String subParent = parent.key.substring(1);
-             * if (!subContent.equals(subParent)){
-             * throw new Exception("HTML inválido");
-             * }
-             */
+            Node parent = this.parents.getLastElement();
+
+            String subContent = content.substring(2);
+            String subParent = parent.key.substring(1);
+            if (!subContent.equals(subParent)) {
+                throw new Exception("malformed HTML");
+            }
+
             this.getPile().popLastTagNode(); // desempilha
 
             return;

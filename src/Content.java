@@ -2,6 +2,7 @@ package src;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.ConnectException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -12,7 +13,7 @@ public class Content {
         this.webpage = webpage;
     }
 
-    public String getContentPage() throws Exception {
+    public void getContentPage() throws Exception {
         String content = new String();
 
         Tree genericTree = new Tree("");
@@ -42,9 +43,8 @@ public class Content {
 
             readr.close();
 
-        } catch (MalformedURLException e) {
-            System.out.println("Malformed URL Exception raised");
+        } catch (Exception e) {
+            System.out.println("URL connection error");
         }
-        return content;
     }
 }
