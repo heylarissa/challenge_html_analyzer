@@ -44,7 +44,7 @@ public class Content {
             readr.close();
 
         } catch (MalformedHTML e) {
-            System.out.println("malformed HTML");
+            System.out.println( e.getMessage() );
  
         } catch (Exception e) {
             System.out.println("URL connection error");
